@@ -4,48 +4,48 @@ import Logic.Interface.Moveable;
 
 public abstract class Piece implements Moveable, Cloneable {
 
-    //Cuando la ficha es blanca la variable es true
+    // When the piece is white, this variable is true
     protected boolean color = true;
-    //EL nombre es el mismo tipo de ficha
+    // The name is the piece's symbol
     protected String name = "";
-    //Ubicacion en la matriz, eje x
-    protected int ubicationX = 0;
-    //Ubicacion en la matriz, eje x
-    protected int ubicationY = 0;
+    // Location in the matrix, X axis
+    protected int positionX = 0;
+    // Location in the matrix, Y axis
+    protected int positionY = 0;
 
-    //Metodos Principales
-    public boolean verifyRange(int corX, int corY){
-        if(corX<9 && corX>0 && corY<9 && corY>0){
+    // Main Methods
+    public boolean verifyRange(int coordX, int coordY){
+        if(coordX<9 && coordX>0 && coordY<9 && coordY>0){
             return true;
         }
         return false;
     }
 
-    //Getters
+    // Getters
     public boolean getColor(){
         return color;
     }
     public String getName(){
         return name;
     }
-    public int getUbicationX(){
-        return ubicationX;
+    public int getPositionX(){
+        return positionX;
     }
-    public int getUbicationY(){
-        return ubicationY;
+    public int getPositionY(){
+        return positionY;
     }
-    //Constructor
-    public Piece(boolean color, String name, int ubicationX, int ubicationY) {
+    // Constructor
+    public Piece(boolean color, String name, int positionX, int positionY) {
         this.color = color;
         this.name = name;
-        this.ubicationX = ubicationX;
-        this.ubicationY = ubicationY;
+        this.positionX = positionX;
+        this.positionY = positionY;
 
     }
 
     @Override
     public String toString() {
-        return "Pieza seleccionada: "+this.getName()+"\nNueva ubicacion X: "+(char)(getUbicationX()+64)+" Y: "+getUbicationY();
+        return "Selected piece: "+this.getName()+"\nNew position X: "+(char)(getPositionX()+64)+" Y: "+getPositionY();
     }
 
     

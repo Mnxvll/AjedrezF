@@ -1,0 +1,12 @@
+Logic/Exceptions/CustomWinException.class
+Logic/Interface/Moveable.class
+Logic/Board.class
+Controller/ControllerA.class
+Logic/King.class
+Logic/Bishop.class
+Logic/Queen.class
+Logic/Rook.class
+Logic/Pawn.class
+Logic/Knight.class
+Logic/Piece.class
+View/Main.class

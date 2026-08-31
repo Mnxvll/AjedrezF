@@ -1,13 +1,13 @@
 package Controller;
 
 import Logic.*;
-import Logic.Exeptions.CustomWinExeption;
+import Logic.Exceptions.CustomWinException;
 
 public class ControllerA {
     
     private Board boardInstance = new Board();
 
-    private Piece[][] board = boardInstance.getClonBoard();
+    private Piece[][] board = boardInstance.getCloneBoard();
 
     private int turn = 0;
 
@@ -20,61 +20,59 @@ public class ControllerA {
 
     }
 
-    public String verifyData(String cordX , String cordY , String newCordX , String newCordY) throws CustomWinExeption{
+    public String verifyData(String coordX, String coordY, String newCoordX, String newCoordY) throws CustomWinException {
 
-        int corddX = 0;
-        int corddY = 0;
-        int newCorddX = 0;
-        int newCorddY = 0;
+        int coordDX = 0;
+        int coordDY = 0;
+        int newCoordDX = 0;
+        int newCoordDY = 0;
 
-        try{
-
-            corddX = cordX.charAt(0)-64;
-            corddY = Integer.parseInt(cordY);
-            newCorddX = newCordX.charAt(0)-64;
-            newCorddY = Integer.parseInt(newCordY);
-            return identifyPiece(corddX,corddY,colorTurn,newCorddX,newCorddY);
-        }catch (NumberFormatException e) {
-            return "El tipo de dato ingresado no es valido";
-        }catch(ArrayIndexOutOfBoundsException exp){
-            return "Fuera de rango";
-        }catch(StringIndexOutOfBoundsException exception){
-            return "Tipo de dato ingresado en conflicto";
+        try {
+            coordDX = coordX.charAt(0) - 64;
+            coordDY = Integer.parseInt(coordY);
+            newCoordDX = newCoordX.charAt(0) - 64;
+            newCoordDY = Integer.parseInt(newCoordY);
+            return identifyPiece(coordDX, coordDY, colorTurn, newCoordDX, newCoordDY);
+        } catch (NumberFormatException e) {
+            return "Invalid data type entered";
+        } catch (ArrayIndexOutOfBoundsException exp) {
+            return "Out of bounds";
+        } catch (StringIndexOutOfBoundsException exception) {
+            return "Conflicting data type entered";
         }
-
         
     }
 
-    public String identifyPiece(int cordX, int cordY, Boolean color, int newCordX, int newCordY) throws CustomWinExeption {
+    public String identifyPiece(int coordX, int coordY, Boolean color, int newCoordX, int newCoordY) throws CustomWinException {
 
-        Piece piece = board[cordX][cordY];
+        Piece piece = board[coordX][coordY];
         if (piece == null) {
-            // manejar el caso en que no hay pieza en la coordenada especificada
-            return "Digite un espacio valido";
+            // handle the case where there is no piece at the specified coordinate
+            return "Enter a valid space";
         } 
 
         
         if (piece.getColor() != color) {
             
-            return "No es el turno del jugador";
+            return "Not the player's turn";
 
-        }else if(!piece.movePiece(newCordX, newCordY, color, boardInstance.getClonBoard()).equals("true") ){
+        }else if(!piece.movePiece(newCoordX, newCoordY, color, boardInstance.getCloneBoard()).equals("true") ){
 
-            //return "Movimiento invalido";
-            return piece.movePiece(newCordX, newCordY, color, boardInstance.getClonBoard());
+            //return "Invalid move";
+            return piece.movePiece(newCoordX, newCoordY, color, boardInstance.getCloneBoard());
     
         }
-        //Si por cumple el movmiento valido itera el turno
+        // If the movement is valid, iterate the turn
         else
         turn();
     
-        boardInstance.movePiece(cordX, cordY, newCordX, newCordY, piece, color);
+        boardInstance.movePiece(coordX, coordY, newCoordX, newCoordY, piece, color);
         return piece.toString();
     }
 
-    //return newBoardPieces
+    // return newBoardPieces
     public Piece[][] getBoardPieces(){
-        Piece[][] boardPieces = boardInstance.getClonBoard();
+        Piece[][] boardPieces = boardInstance.getCloneBoard();
         return boardPieces;
     }
 

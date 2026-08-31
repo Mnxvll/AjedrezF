@@ -3,7 +3,7 @@ package Logic.Interface;
 import Logic.Piece;
 
 public interface Moveable {
-    String movePiece(int ubicationX, int ubicationY, Boolean color, Piece[][] board);
+    String movePiece(int positionX, int positionY, Boolean color, Piece[][] board);
 
-    String verifyMovement(int cordX, int cordY, boolean color, Piece[][] board);
+    String verifyMovement(int coordX, int coordY, boolean color, Piece[][] board);
 }
