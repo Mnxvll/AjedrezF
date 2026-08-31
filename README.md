@@ -1,8 +1,3 @@
-# Console Chess Game
-
-This is a simple console-based chess game developed in Java. 
-It features a text interface where players interact with the board using algebraic-style coordinates (e.g., X and Y).
-
 ## How to Play
 
 1. Run the `Main.java` class located in the `src/main/java/View` directory.
