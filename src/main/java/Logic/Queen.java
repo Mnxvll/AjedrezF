@@ -4,83 +4,82 @@
 
 
         //True White, False Black
-        public Queen(boolean color, String name, int ubicationX, int ubicationY) {
-            super(color, name, ubicationX, ubicationY);
+        public Queen(boolean color, String name, int positionX, int positionY) {
+            super(color, name, positionX, positionY);
         }
 
         
-        public String movePiece(int corX, int corY, Boolean color, Piece[][] board) {
+        public String movePiece(int coordX, int coordY, Boolean color, Piece[][] board) {
 
-            //ejecuta el metodo verificar y si se cumple alguna condicion dara false y saldra del metodo mover pieza
-            if (!verifyMovement(corX, corY, color,board).equals("true")) {
-                return verifyMovement(corX, corY, color, board);
+            // execute verify method
+            if (!verifyMovement(coordX, coordY, color,board).equals("true")) {
+                return verifyMovement(coordX, coordY, color, board);
             }
-            // Actualiza las anteriores posiciones con las nuevas
-            this.ubicationX = corX;
-            this.ubicationY = corY;
+            // Update previous positions with the new ones
+            this.positionX = coordX;
+            this.positionY = coordY;
 
-            //No devuelve el tablero ya que eso se hace en el identificador
             return  "true";
         }
 
         @Override
-        public String verifyMovement(int corX, int corY, boolean color, Piece[][] board) {
-           //Si llega el caso de que el movimiento no es en diagonal
-            //Se crean dos variables para calcular la cantidad de ubicaciones avanzadas
-            int advancedX = Math.abs(corX-ubicationX);
-            int advancedY = Math.abs(corY-ubicationY);
+        public String verifyMovement(int coordX, int coordY, boolean color, Piece[][] board) {
+           // If the movement is not diagonal
+            // Create two variables to calculate the amount of advanced locations
+            int advancedX = Math.abs(coordX-positionX);
+            int advancedY = Math.abs(coordY-positionY);
 
-            //Verifico hacia donde va a ir
-            //Hay cinco casos de iteracion (-y-x), (-x+y), (x+y), (-x-y), (x-y)
-            int direccionX = Integer.compare(corX, ubicationX);
-            int direccionY = Integer.compare(corY, ubicationY);
+            // Verify where it is going to go
+            // There are five cases of iteration (-y-x), (-x+y), (x+y), (-x-y), (x-y)
+            int directionX = Integer.compare(coordX, positionX);
+            int directionY = Integer.compare(coordY, positionY);
 
-            //Variables posiciones actuales
-            int currentlyX = ubicationX + direccionX;
-            int currentlyY = ubicationY + direccionY;
+            // Current position variables
+            int currentlyX = positionX + directionX;
+            int currentlyY = positionY + directionY;
 
             if(advancedX == advancedY){
 
-                //Ciclo que se va a encargar de iterar hasta la nueva posicion de la pieza
-                while(currentlyX != corX && currentlyY != corY) {
+                // Loop that will iterate to the new piece position
+                while(currentlyX != coordX && currentlyY != coordY) {
                     if(board[currentlyX][currentlyY] != null){
-                        //Se va a entrar si hay algún tipo de obstáculo
-                        return "ERROR [No puedes mover, hay una pieza en tu camino que te obstruye]";
+                        // Enter if there is any kind of obstacle
+                        return "ERROR [Cannot move, a piece is blocking your path]";
                     }
-                    //En teoría esto itera hacia la dirección en que se movió, ya sea en X o Y
-                    currentlyX += direccionX;
-                    currentlyY += direccionY;
+                    // In theory this iterates in the direction it moved, whether in X or Y
+                    currentlyX += directionX;
+                    currentlyY += directionY;
                 }
 
             }
-            //movimiento vertical
-            else if (direccionX == 0) {
-                int currentY = ubicationY + direccionY;
-                while (currentY != corY) {
-                    if (board[ubicationX][currentY] != null) {
-                        return "ERROR [Vertical, no puedes moverte, hay una pieza en tu camino que te obstruye]"; // Se ejecuta si hay algo en el camino
+            // vertical movement
+            else if (directionX == 0) {
+                int currentY = positionY + directionY;
+                while (currentY != coordY) {
+                    if (board[positionX][currentY] != null) {
+                        return "ERROR [Vertical movement, you cannot move, a piece is blocking your path]"; // Executes if there is something in the path
                     }
-                    currentY += direccionY;
+                    currentY += directionY;
                 }
             }
-            // si se mueve de forma horizontal
-            else if (direccionY == 0) {
-                int currentX = ubicationX + direccionX;
-                while (currentX != corX) {
-                    if (board[currentX][ubicationY] != null) {
-                        return "ERROR [Movimiento horizontal, no puedes moverte, hay una pieza en tu camino que te obstruye]"; // Se ejecuta si hay algo en el camino
+            // horizontal movement
+            else if (directionY == 0) {
+                int currentX = positionX + directionX;
+                while (currentX != coordX) {
+                    if (board[currentX][positionY] != null) {
+                        return "ERROR [Horizontal movement, you cannot move, a piece is blocking your path]"; // Executes if there is something in the path
                     }
-                    currentX += direccionX;
+                    currentX += directionX;
                 }
-            }else if(advancedX != advancedY && direccionX!=0 && direccionY != 0){
-                return "ERROR [Movimiento invalido]";
+            }else if(advancedX != advancedY && directionX!=0 && directionY != 0){
+                return "ERROR [Invalid movement]";
             }
 
-            Piece targetPiece = board[corX][corY];
+            Piece targetPiece = board[coordX][coordY];
             if(targetPiece == null || targetPiece.getColor() != getColor())
                 return "true";
             else
-                return "ERROR [No te puedes comer a ti mismo]";
+                return "ERROR [You cannot capture your own piece]";
         }
 
 

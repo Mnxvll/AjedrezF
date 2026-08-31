@@ -10,8 +10,8 @@ public class RookTest {
     public void MovementTest() {
         Piece[][] board = new Piece[8][8];
         Rook rookA = new Rook (true, "rookA", 1, 1);
-        //Test para que no se mueva si el movimiento no es V u H
-        assertEquals("ERROR [No te estas moviendo horizontal ni verticalmente]",rookA.movePiece(2,3,true,board));
+        // Test that it does not move if the movement is not V or H
+        assertEquals("ERROR [You are not moving horizontally or vertically]",rookA.movePiece(2,3,true,board));
     }
     @Test
     public void KillTest(){
@@ -19,8 +19,8 @@ public class RookTest {
         Rook rookA = new Rook (true, "rookA", 1, 1);
         Rook rookB = new Rook (true, "rookA", 1, 5);
         board[1][5]=rookB;
-        //Test para que no mate a su propio equipo
-        assertEquals("ERROR [No te puedes comer a ti mismo]", rookA.movePiece(1, 5, true, board));
+        // Test that it does not capture its own team
+        assertEquals("ERROR [You cannot capture your own piece]", rookA.movePiece(1, 5, true, board));
     }
     public void OthersTest(){
         Piece[][] board = new Piece[8][8];
@@ -31,11 +31,11 @@ public class RookTest {
         board[1][5]=rookB;
         board[3][1]=rookC;
         board[2][1]=rookD;
-        //Test para que no salte piezas verticalmente
-        assertEquals("ERROR [Movimiento vertical, no puedes mover, hay una pieza en tu camino que te obstruye]", rookA.movePiece(1, 6, true, board));
-        //Test para que no salte piezas horizontalmente
-        assertEquals("ERROR [Movimiento horizontal, no puedes mover, hay una pieza en tu camino que te obstruye]", rookA.movePiece(3, 2, true, board));
-        //Test para que mate piezas de otro color
+        // Test that it does not jump over pieces vertically
+        assertEquals("ERROR [Vertical movement, you cannot move, there is a piece blocking your path]", rookA.movePiece(1, 6, true, board));
+        // Test that it does not jump over pieces horizontally
+        assertEquals("ERROR [Horizontal movement, you cannot move, there is a piece blocking your path]", rookA.movePiece(3, 2, true, board));
+        // Test that it captures pieces of another color
         assertEquals("true", rookA.movePiece(2, 1, true, board));
     }
 

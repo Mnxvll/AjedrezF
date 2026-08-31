@@ -12,16 +12,16 @@ public class PawnTest {
         Piece[][] board = new Piece[8][8];
         Pawn pawn = new Pawn(true, "pawn", 1, 2);
         Pawn pawB = new Pawn(true, "pawn", 2, 3);
-        // Test para que no se mueva mas de dos cuadros en su posicion inicial
-        assertEquals("ERROR [Movimiento invalido para esta posicion]", pawn.verifyMovement(1, 5, true, board));
-        //Test para que no se mueva mas de un cuadro si no esta en su posicion inicial
-        assertEquals("ERROR [Movimiento no permitido]", pawB.verifyMovement(2, 5, true, board));
-        // Test para que no se mueva a una casilla vacia a la derecha o a la izquierda
-        assertEquals("ERROR [Movimiento imposible]", pawn.movePiece(3, 3, true, board));
-        // Test para que el peon no retroceda
-        assertEquals("ERROR [No puedes retroceder]", pawn.movePiece(1, 1, true, board));
-        // Test para que el peon no se mueva en diagonal si no hay enemigos
-        assertEquals("ERROR [Movimiento imposible]", pawn.movePiece(2, 3, true, board));
+        // Test that it does not move more than two squares in its initial position
+        assertEquals("ERROR [Invalid movement for this position]", pawn.verifyMovement(1, 5, true, board));
+        // Test that it does not move more than one square if not in its initial position
+        assertEquals("ERROR [Movement not allowed]", pawB.verifyMovement(2, 5, true, board));
+        // Test that it does not move to an empty space to the right or left
+        assertEquals("ERROR [Impossible movement]", pawn.movePiece(3, 3, true, board));
+        // Test that the pawn does not move backwards
+        assertEquals("ERROR [You cannot move backwards]", pawn.movePiece(1, 1, true, board));
+        // Test that the pawn does not move diagonally if there are no enemies
+        assertEquals("ERROR [Impossible movement]", pawn.movePiece(2, 3, true, board));
     }
     @Test
     public void KillTest(){
@@ -33,14 +33,13 @@ public class PawnTest {
         board[1][3] = pawnB;
         board[3][3] = pawnC;
         board[1][7] = pawnD;
-        // Test para que no mate a su propio equipo
-        assertEquals("ERROR [No puedes matar a tu propio equipo]", pawnA.movePiece(1, 3, true, board));
-        //Test para que mate piezas de otro color
+        // Test that it does not capture its own team
+        assertEquals("ERROR [You cannot capture your own piece]", pawnA.movePiece(1, 3, true, board));
+        // Test that it captures pieces of another color
         assertEquals("true", pawnA.movePiece(3, 3, true, board));
-        //Test para que no mate diagonalmente a larga distancia
-        assertEquals("ERROR [Movimiento no permitido]", pawnA.movePiece(1, 7, true, board));
+        // Test that it does not capture diagonally at a long distance
+        assertEquals("ERROR [Movement not allowed]", pawnA.movePiece(1, 7, true, board));
     }
 
 
 }
-   

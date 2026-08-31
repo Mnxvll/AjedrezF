@@ -6,58 +6,58 @@ public class Bishop extends Piece{
 
     
 
-    public Bishop(boolean color, String name, int ubicationX, int ubicationY) {
-        super(color, name, ubicationX, ubicationY);
+    public Bishop(boolean color, String name, int positionX, int positionY) {
+        super(color, name, positionX, positionY);
     }
     
 
     @Override
-    public String movePiece(int corX, int corY, Boolean color, Piece[][] board) {
-        if (!verifyMovement(corX ,corY ,color, board).equals("true")) {
-            return verifyMovement(corX ,corY ,color, board);
+    public String movePiece(int coordX, int coordY, Boolean color, Piece[][] board) {
+        if (!verifyMovement(coordX, coordY, color, board).equals("true")) {
+            return verifyMovement(coordX, coordY, color, board);
         }
-        this.ubicationX = corX;
-        this.ubicationY = corY;
+        this.positionX = coordX;
+        this.positionY = coordY;
         return "true";
     }
-    public String verifyMovement(int destX, int destY, boolean color, Piece[][] board) {
-        //Instancia Board
+    public String verifyMovement(int coordX, int coordY, boolean color, Piece[][] board) {
+        // Instantiate Board (comment kept for context)
         
 
-        //Si llega el caso de que el movimiento no es en diagonal
-        //Se crean dos variables para calcular la cantidad de ubicaciones avanzadas
-        int advancedX = Math.abs(destX-ubicationX);
-        int advancedY = Math.abs(destY-ubicationY);
+        // If the movement is not diagonal
+        // Create two variables to calculate the amount of advanced locations
+        int advancedX = Math.abs(coordX-positionX);
+        int advancedY = Math.abs(coordY-positionY);
 
-        //Compara los avances, si no son iguales eso significa que no es un movimiento valido
+        // Compare the advances, if they are not equal it means it is not a valid move
         if(advancedX != advancedY){
-            return "ERROR [Movimiento no valido, movimiento no diagonal]";
+            return "ERROR [Invalid move, not diagonal]";
         }
 
-        //Verifico hacia donde va a ir
-        //Hay cinco casos de iteracion (-y-x), (-x+y), (x+y), (-x-y), (x-y)
-        int direccionX = Integer.compare(destX, ubicationX);
-        int direccionY = Integer.compare(destY, ubicationY);
+        // Verify where it is going to go
+        // There are five cases of iteration (-y-x), (-x+y), (x+y), (-x-y), (x-y)
+        int directionX = Integer.compare(coordX, positionX);
+        int directionY = Integer.compare(coordY, positionY);
 
-        //Variables posiciones actuales
-        int currentlyX = ubicationX + direccionX;
-        int currentlyY = ubicationY + direccionY;
+        // Current position variables
+        int currentlyX = positionX + directionX;
+        int currentlyY = positionY + directionY;
 
-        //Ciclo que se va a encargar de iterar hasta la nueva posicion de la pieza
-        while(currentlyX != destX && currentlyY != destY) {
+        // Loop that will iterate to the new piece position
+        while(currentlyX != coordX && currentlyY != coordY) {
             if(board[currentlyX][currentlyY] != null){
-                //Se va a entrar si hay algún tipo de obstáculo
-                return "ERROR [No puedes mover, hay una pieza en tu camino que te obstruye]";
+                // Enter if there is any kind of obstacle
+                return "ERROR [Cannot move, a piece is blocking your path]";
             }
-            //En teoría esto itera hacia la dirección en que se movió, ya sea en X o Y
-            currentlyX += direccionX;
-            currentlyY += direccionY;
+            // In theory this iterates in the direction it moved, whether in X or Y
+            currentlyX += directionX;
+            currentlyY += directionY;
         }
 
         Piece targetPiece = board[currentlyX][currentlyY];
         if(targetPiece == null || targetPiece.getColor() != getColor())
         return "true";
         else
-        return "ERROR [No te puedes comer a ti mismo]";
+        return "ERROR [You cannot capture your own piece]";
     }
 }

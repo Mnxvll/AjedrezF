@@ -8,8 +8,8 @@ public class KingTest {
     public void MovementTest() {
         Piece[][] board = new Piece[8][8];
         King king = new King(true, "king", 4, 1);
-       //Test para que el rey solo se mueva un cuadro
-        assertEquals("ERROR [Movimiento no valido segun las reglas del ajedrez]",king.movePiece(4,3,true,board));
+       // Test that the king only moves one square
+        assertEquals("ERROR [Invalid move according to chess rules]",king.movePiece(4,3,true,board));
     }
     @Test
     public void KillTest(){
@@ -19,9 +19,9 @@ public class KingTest {
         King kingC = new King(false, "kingC", 3, 1);
         board[4][2]=kingB;
         board[3][1]=kingC;
-        //Test para que no mate a su propio equipo
-        assertEquals("ERROR [No te puedes comer a ti mismo]", kingB.movePiece(4, 2, true, board));
-        //Test para que mate piezas de otro color
+        // Test that it does not capture its own team
+        assertEquals("ERROR [You cannot capture your own piece]", kingB.movePiece(4, 2, true, board));
+        // Test that it captures pieces of another color
         assertEquals("true", kingA.movePiece(3, 1, true, board));
     }
 }

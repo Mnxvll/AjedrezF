@@ -9,8 +9,8 @@ public class QueenTest {
     public void MovementTest() {
         Piece[][] board = new Piece[8][8];
         Queen queen = new Queen (true, "queen", 5, 1);
-        //Test para que no se mueva como caballo
-        assertEquals("ERROR [Movimiento invalido]",queen.movePiece(4,3,true,board));
+        // Test that it does not move like a knight
+        assertEquals("ERROR [Invalid movement]",queen.movePiece(4,3,true,board));
     }
     @Test
     public void KillTest(){
@@ -18,8 +18,8 @@ public class QueenTest {
         Queen queenA = new Queen (true, "queenA", 5, 1);
         Queen queenB = new Queen (true, "queenB", 5, 2);
         board[5][2]=queenB;
-        //Test para que no mate a su propio equipo
-        assertEquals("ERROR [No te puedes comer a ti mismo]", queenA.movePiece(5, 2, true, board));
+        // Test that it does not capture its own team
+        assertEquals("ERROR [You cannot capture your own piece]", queenA.movePiece(5, 2, true, board));
     }
     @Test
     public void OthersTest(){
@@ -31,11 +31,11 @@ public class QueenTest {
         board[5][2]=queenB;
         board[4][2]=queenC;
         board[6][2]=queenD;
-        //Test para que no salte piezas verticalmente
-        assertEquals("ERROR [Vertical, no puedes moverte, hay una pieza en tu camino que te obstruye]", queenA.movePiece(5, 3, true, board));
-        //Test para que no salte piezas diagonalmente
-        assertEquals("ERROR [No puedes mover, hay una pieza en tu camino que te obstruye]", queenA.movePiece(3, 3, true, board));
-        //Test para que mate piezas de otro color
+        // Test that it does not jump over pieces vertically
+        assertEquals("ERROR [Vertical movement, you cannot move, a piece is blocking your path]", queenA.movePiece(5, 3, true, board));
+        // Test that it does not jump over pieces diagonally
+        assertEquals("ERROR [Cannot move, a piece is blocking your path]", queenA.movePiece(3, 3, true, board));
+        // Test that it captures pieces of another color
         assertEquals("true", queenA.movePiece(6, 2, true, board));
     }
 }

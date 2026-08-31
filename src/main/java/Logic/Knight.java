@@ -3,48 +3,44 @@ package Logic;
 public class Knight extends Piece {
 
 
-    public Knight(boolean color, String name, int ubicationX, int ubicationY) {
-        super(color, name, ubicationX, ubicationY);
+    public Knight(boolean color, String name, int positionX, int positionY) {
+        super(color, name, positionX, positionY);
     }
 
-    
-
-
     @Override
-    public String movePiece(int corX, int corY, Boolean color, Piece [][] board) {
+    public String movePiece(int coordX, int coordY, Boolean color, Piece [][] board) {
 
 
-        //ejecuta el metodo verificar y si se cumple alguna condicion dara false y saldra del metodo mover pieza
-        if (!verifyMovement(corX, corY, color, board).equals("true")) {
-            return verifyMovement(corX, corY, color, board);
+        // execute verify method
+        if (!verifyMovement(coordX, coordY, color, board).equals("true")) {
+            return verifyMovement(coordX, coordY, color, board);
         }
 
-        //actualiza las anteriores posiciones con las nuevas
-        this.ubicationX = corX;
-        this.ubicationY = corY;
+        // update previous positions with the new ones
+        this.positionX = coordX;
+        this.positionY = coordY;
 
-        //No devuelve el tablero ya que eso se hace en el identificador
         return "true";
     }
 
-    public String verifyMovement(int cordX, int cordY, boolean colo, Piece[][] board) {
+    public String verifyMovement(int coordX, int coordY, boolean color, Piece[][] board) {
         
-        int actualMenosNuevaPosX = Math.abs(cordX - this.ubicationX);
-        int actualMenosNuevaPosY = Math.abs(cordY - this.ubicationY);
+        int diffX = Math.abs(coordX - this.positionX);
+        int diffY = Math.abs(coordY - this.positionY);
  
-        // Verifica que la nueva posicion  no tenga una pieza del mismo color
-        if (board[cordX][cordY] != null && board[cordX][cordY].getColor() == this.color) {
-            return "ERROR [No te puedes comer a ti mismo]";
-            // Verifica que el caballo no se salga del tablero
-        } else if (!verifyRange(cordX, cordY)) {
-            return "ERROR [Has salido de los limites]";//Esto nunca se deberia de ejecutar
-            //Verifica que el caballo se  mueva en L
-        } else if ((actualMenosNuevaPosX + actualMenosNuevaPosY )!= 3) {
-            return "ERROR [El movimiento no cumple las reglas del ajedrez]";
-        } else if (actualMenosNuevaPosX == 0 && actualMenosNuevaPosY!=0) {
-            return "ERROR [Jugada invalida]";
-        } else if (actualMenosNuevaPosX>2) {
-            return "ERROR [Jugada invalida]";
+        // Verify that the new position does not have a piece of the same color
+        if (board[coordX][coordY] != null && board[coordX][coordY].getColor() == this.color) {
+            return "ERROR [You cannot capture your own piece]";
+            // Verify that the knight does not leave the board
+        } else if (!verifyRange(coordX, coordY)) {
+            return "ERROR [You have gone out of bounds]"; // This should never execute
+            // Verify that the knight moves in L shape
+        } else if ((diffX + diffY )!= 3) {
+            return "ERROR [Movement does not follow chess rules]";
+        } else if (diffX == 0 && diffY!=0) {
+            return "ERROR [Invalid move]";
+        } else if (diffX>2) {
+            return "ERROR [Invalid move]";
         } else {
             return "true";
         }

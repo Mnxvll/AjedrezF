@@ -1,0 +1,12 @@
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Controller/ControllerA.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Bishop.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Board.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Exceptions/CustomWinException.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Interface/Moveable.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/King.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Knight.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Pawn.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Piece.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Queen.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/Logic/Rook.java
+/home/mnxvll/Documents/proyectzzzz/src/main/java/View/Main.java

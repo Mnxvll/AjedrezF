@@ -9,8 +9,8 @@ public class KnightTest {
     public void MovementTest() {
         Piece[][] board = new Piece[8][8];
         Knight knight = new Knight(true, "knight", 2, 1);
-        //Test para que el caballo solo se mueva en L
-        assertEquals("ERROR [El movimiento no cumple las reglas del ajedrez]",knight.movePiece(2, 3, true, board));
+        // Test that the knight only moves in L shape
+        assertEquals("ERROR [Movement does not follow chess rules]",knight.movePiece(2, 3, true, board));
     }
     @Test
     public void KillTest(){
@@ -20,9 +20,9 @@ public class KnightTest {
         Knight knightC = new Knight(false, "knightC", 1, 3);
         board[3][3]=knightB;
         board[1][3]=knightC;
-        //Test para que no mate a su propio equipo
-        assertEquals("ERROR [No te puedes comer a ti mismo]", knightA.movePiece(3, 3, true, board));
-        //Test para que mate piezas de otro color
+        // Test that it does not capture its own team
+        assertEquals("ERROR [You cannot capture your own piece]", knightA.movePiece(3, 3, true, board));
+        // Test that it captures pieces of another color
         assertEquals("true", knightA.movePiece(1, 3, true, board));
     }
     
